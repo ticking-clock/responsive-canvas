@@ -7,14 +7,14 @@ module.exports = function(grunt) {
             },
             build: {
                 files: {
-                    '<%= pkg.name %>.min.js': ['<%= pkg.name %>.js']
+                    '<%= pkg.name %>.min.js': ['<%= pkg.name %>.js', 'plugins/**/*.js']
                 }
             }
         },
         qunit: {
             xsmall_320_480: {
                 options: {
-                    urls: [ "tests/tests.html?width=320&height=480" ],
+                    urls: [ 'tests/tests.html?width=320&height=480' ],
                     page: {
                         viewportSize: { width: 320, height: 480 }
                     }
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
             },
             xsmall_320_568: {
                 options: {
-                    urls: [ "tests/tests.html?width=320&height=568" ],
+                    urls: [ 'tests/tests.html?width=320&height=568' ],
                     page: {
                         viewportSize: { width: 320, height: 568 }
                     }
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
             },
             xsmall_320_640: {
                 options: {
-                    urls: [ "tests/tests.html?width=320&height=640" ],
+                    urls: [ 'tests/tests.html?width=320&height=640' ],
                     page: {
                         viewportSize: { width: 320, height: 640 }
                     }
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
             },
             small_600_963: {
                 options: {
-                    urls: [ "tests/tests.html?width=600&height=963" ],
+                    urls: [ 'tests/tests.html?width=600&height=963' ],
                     page: {
                         viewportSize: { width: 600, height: 963 }
                     }
@@ -46,7 +46,7 @@ module.exports = function(grunt) {
             },
             medium_768_1024: {
                 options: {
-                    urls: [ "tests/tests.html?width=768&height=1024" ],
+                    urls: [ 'tests/tests.html?width=768&height=1024' ],
                     page: {
                         viewportSize: { width: 768, height: 1024 }
                     }
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
             },
             large_1200_1920: {
                 options: {
-                    urls: [ "tests/tests.html?width=1200&height=1920" ],
+                    urls: [ 'tests/tests.html?width=1200&height=1920' ],
                     page: {
                         viewportSize: { width: 1200, height: 1920 }
                     }
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
             },
             large_1280_1024: {
                 options: {
-                    urls: [ "tests/tests.html?width=1280&height=1024" ],
+                    urls: [ 'tests/tests.html?width=1280&height=1024' ],
                     page: {
                         viewportSize: { width: 1280, height: 1024 }
                     }
@@ -70,7 +70,7 @@ module.exports = function(grunt) {
             },
             large_1600_1200: {
                 options: {
-                    urls: [ "tests/tests.html?width=1600&height=1200" ],
+                    urls: [ 'tests/tests.html?width=1600&height=1200' ],
                     page: {
                         viewportSize: { width: 1600, height: 1200 }
                     }
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
             },
             xlarge_1920_1080: {
                 options: {
-                    urls: [ "tests/tests.html?width=1920&height=1080" ],
+                    urls: [ 'tests/tests.html?width=1920&height=1080' ],
                     page: {
                         viewportSize: { width: 1920, height: 1080 }
                     }
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: ['responsive-canvas.js'],
+            files: ['responsive-canvas.js', 'plugins/**/*.js'],
             tasks: ['uglify']
         }
     });

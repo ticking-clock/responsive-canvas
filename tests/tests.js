@@ -4,8 +4,8 @@
         return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
     }
 
-    var windowWidth = getParameterByName("width") || window.innerWidth;     // Just use actual window size if not using grunt
-    var windowHeight = getParameterByName("height") || window.innerHeight;
+    window.windowWidth = getParameterByName("width") || window.innerWidth;     // Just use actual window size if not using grunt
+    window.windowHeight = getParameterByName("height") || window.innerHeight;
 
     module("Main tests", {
         setup: function() {
@@ -61,7 +61,7 @@
     module("CSS tests", {
         setup: function() {
             // Add a fake stylesheet so the canvas element gets display:block from a different source
-                $('<style type="text/css"> canvas { display: block; } </style>').appendTo("#qunit-fixture");
+            $('<style type="text/css"> canvas { display: block; } </style>').appendTo("#qunit-fixture");
             $("body").css("overflow", "hidden");
         },
         teardown: function() {
