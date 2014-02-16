@@ -3,11 +3,21 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         uglify: {
             options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+                banner: '/*! <%= pkg.name %> v<%= pkg.version %> */\n'
             },
-            build: {
+            core: {
                 files: {
-                    '<%= pkg.name %>.min.js': ['<%= pkg.name %>.js', 'plugins/**/*.js']
+                    'dist/<%= pkg.name %>.min.js': ['src/<%= pkg.name %>.js']
+                }
+            },
+            kinetic: {
+                files: {
+                    'dist/<%= pkg.name %>.kinetic.min.js': ['src/<%= pkg.name %>.js', 'src/plugins/**/KineticJS*.js']
+                }
+            },
+            test: {
+                files: {
+                    'tests/<%= pkg.name %>.tests.min.js': ['src/<%= pkg.name %>.js', 'src/plugins/**/*.js']
                 }
             }
         },
@@ -94,6 +104,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('test', ['uglify', 'qunit']);
-    grunt.registerTask('default', ['uglify', 'qunit']);
+    grunt.registerTask('default', ['uglify:core', 'uglify:kinetic']);
+    grunt.registerTask('test', ['uglify:test', 'qunit']);
 };

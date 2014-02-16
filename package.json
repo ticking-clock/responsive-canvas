@@ -1,6 +1,6 @@
 {
   "name": "responsive-canvas",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Small JS library that makes the HTML canvas fill the width and height of its containing element",
   "main": "responsive-canvas.js",
   "scripts": {

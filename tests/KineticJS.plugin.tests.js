@@ -36,23 +36,12 @@
         equal(stage.getHeight(), windowHeight);
     });
 
-    test("Kinetic content contain is display: block", function() {
+    test("Kinetic content element is display: block", function() {
         var stage = new Kinetic.Stage({ container: "qunit-fixture" });
         var layer = new Kinetic.Layer();
         stage.add(layer);
         responsiveCanvas();
         equal($(".kineticjs-content").css("display"), "block");
     });
-
-    module("Kinetic CSS tests", {
-        setup: function() {
-            stop();
-            $.getScript("../bower_components/kineticjs/kinetic.js")
-                .done(function() {
-                    start();
-                });
-        }
-    });
-
 
 })();

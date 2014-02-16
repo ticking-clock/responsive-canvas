@@ -1,12 +1,13 @@
 (function(window, document) {
-    var cList = [];
-    var getCanvases = function() {
-        cList = document.querySelectorAll("canvas");
-    };
-
-    var rc = window.responsiveCanvas = function() {
-        rc._init();
-    };
+    var BLOCK = "block",
+        ZEROPX = "0px",
+        cList = [],
+        getCanvases = function() {
+            cList = document.querySelectorAll("canvas");
+        },
+        rc = window.responsiveCanvas = function() {
+            rc._init();
+        };
 
     rc._init = function() {
         getCanvases();
@@ -16,16 +17,16 @@
     };
 
     rc.setStyles = function() {
-        var c;
+        var c, body = document.body;
         for (var i=0, len=cList.length; i<len; i++) {
             c = cList[i];
-            if (getComputedStyle(c).display !== "block") {
-                c.style.display = "block";
+            if (getComputedStyle(c).display !== BLOCK) {
+                c.style.display = BLOCK;
             }
         }
 
-        if (getComputedStyle(document.body).margin !== "0px") {
-            document.body.style.margin = "0px";
+        if (getComputedStyle(body).margin !== ZEROPX) {
+            body.style.margin = ZEROPX;
         }
     };
 
