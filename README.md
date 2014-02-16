@@ -2,16 +2,22 @@ responsive-canvas
 =================
 A very small library with no dependencies that makes your full-screen HTML5 canvas responsive to the viewport.
 
-Plugins
+Framework support
 ---
-Some major HTML5 canvas frameworks are supported via plugin files:
+The following HTML5 canvas frameworks are supported via plugin files:
 - KineticJS
 
 
 Usage
 ---
+When using vanilla HTML5 canvas elements:
 ```javascript
 <script src="responsive-canvas.min.js"></script>
+```
+
+When using KineticJS:
+```javascript
+<script src="responsive-canvas.kinetic.min.js"></script>
 ```
 
 When the script loads, it will automatically resize all `<canvas>` elements to match the viewport size.
