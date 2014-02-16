@@ -16,7 +16,7 @@ You can manually trigger the resize by invoking the responsive canvas function.
 responsiveCanvas();
 ```
 
-Testing
+Building
 ---
 Begin by installing the node and bower dependencies.
 ```
@@ -24,11 +24,12 @@ grunt install
 bower install
 ```
 
-Run the responsive tests with
+Testing
+---
+After the dev dependencies are installed, run the responsive tests.
 ```
 grunt test
 ```
-
 
 Todo
 ---
