@@ -20,7 +20,7 @@ Building
 ---
 Begin by installing the node and bower dependencies.
 ```
-grunt install
+npm install
 bower install
 ```
 

@@ -21,6 +21,8 @@
     "tests"
   ],
   "devDependencies": {
+    "qunit": "1.14.0",
+    "jquery": "2.1.0",
     "kineticjs": "5.0.1"
   }
 }
