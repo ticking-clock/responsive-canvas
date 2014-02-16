@@ -15,3 +15,21 @@ You can manually trigger the resize by invoking the responsive canvas function.
 ```javascript
 responsiveCanvas();
 ```
+
+Testing
+---
+Begin by installing the node and bower dependencies.
+```
+grunt install
+bower install
+```
+
+Run the responsive tests with
+```
+grunt test
+```
+
+
+Todo
+---
+- Add option for scaling with current aspect ratio instead of extending the canvas
