@@ -7,7 +7,7 @@
     var windowWidth = getParameterByName("width") || window.innerWidth;     // Just use actual window size if not using grunt
     var windowHeight = getParameterByName("height") || window.innerHeight;
 
-    module("responsive-canvas tests", {
+    module("Main tests", {
         setup: function() {
             // Hides the page scrollbars so their extra width doesn't affect the tests
             $("body").css("overflow", "hidden");
@@ -54,6 +54,31 @@
     test("Canvas is display:block to hide scrollbars", function() {
         var $can = $("#canvas-fixture");
         equal($can.css("display"), "block");
+    });
+
+    /* --- */
+
+    module("CSS tests", {
+        setup: function() {
+            // Add a fake stylesheet so the canvas element gets display:block from a different source
+                $('<style type="text/css"> canvas { display: block; } </style>').appendTo("#qunit-fixture");
+            $("body").css("overflow", "hidden");
+        },
+        teardown: function() {
+            $("body").css("overflow", "auto");
+        }
+    });
+
+    test("display: block is not added if canvas already has style", function() {
+        // Get a fresh canvas since the old one was created before the fake stylesheet was added
+        $("#canvas-fixture").replaceWith('<canvas id="canvas-fixture"></canvas>');
+        var $can = $("#canvas-fixture");
+        responsiveCanvas();
+        var style = $can.attr("style"),
+            styleWasSet = (function() {
+                return style && style.indexOf("display: block") !== -1;
+            })();
+        ok(!styleWasSet, "style attribute should not contain display: block");
     });
 
 })();

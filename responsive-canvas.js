@@ -6,7 +6,9 @@
         cList = document.querySelectorAll("canvas");
         for (var i=0, len=cList.length; i<len; i++) {
             c = cList[i];
-            c.style.display = "block";
+            if (getComputedStyle(c).display !== "block") {
+                c.style.display = "block";
+            }
         }
     }
 
