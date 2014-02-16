@@ -7,15 +7,17 @@
     window.windowWidth = getParameterByName("width") || window.innerWidth;     // Just use actual window size if not using grunt
     window.windowHeight = getParameterByName("height") || window.innerHeight;
 
-    module("Main tests", {
-        setup: function() {
-            // Hides the page scrollbars so their extra width doesn't affect the tests
-            $("body").css("overflow", "hidden");
-        },
-        teardown: function() {
-            $("body").css("overflow", "auto");
-        }
+    QUnit.begin(function() {
+        // Hides the page scrollbars so their extra width doesn't affect the tests
+        $("body").css("overflow", "hidden");
     });
+
+    QUnit.done(function() {
+        $("body").css("overflow", "");
+
+    });
+
+    module("Main tests");
 
     test("responsiveCanvas exists", function() {
         ok(typeof window.responsiveCanvas !== "undefined");
@@ -56,16 +58,21 @@
         equal($can.css("display"), "block");
     });
 
+    test("Body has margin:0 to hide scrollbars", function() {
+        var $body = $("body"),
+            margin = $body.css("margin") || "0px";
+        equal(margin, "0px");
+    });
+
     /* --- */
 
     module("CSS tests", {
         setup: function() {
-            // Add a fake stylesheet so the canvas element gets display:block from a different source
-            $('<style type="text/css"> canvas { display: block; } </style>').appendTo("#qunit-fixture");
-            $("body").css("overflow", "hidden");
-        },
-        teardown: function() {
-            $("body").css("overflow", "auto");
+            // Reset the manual body style
+            $("body").css("margin", "");
+
+            // Add a fake stylesheet so elements get styles applied from another source
+            $('<style type="text/css"> canvas { display: block; } body { margin: 0; } </style>').appendTo("#qunit-fixture");
         }
     });
 
@@ -80,5 +87,14 @@
             })();
         ok(!styleWasSet, "style attribute should not contain display: block");
     });
+
+    test("body margin: 0 is not added if body already has no margin", function() {
+        var $body = $("body"),
+            style = $body.attr("style"),
+            styleWasSet = (function() {
+                return style && style.indexOf("margin: 0") !== -1;
+            })();
+        ok(!styleWasSet, "body style attribute should not contain margin: 0");
+    })
 
 })();
