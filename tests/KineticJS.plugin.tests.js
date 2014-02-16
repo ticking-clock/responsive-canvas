@@ -8,7 +8,11 @@
 
     module("Kinetic module tests with script", {
         setup: function() {
-            $('<script type="text/javascript" src="../bower_components/kineticjs/kinetic.js"></script>').appendTo("#qunit-fixture");
+            stop();
+            $.getScript("../bower_components/kineticjs/kinetic.js")
+                .done(function() {
+                    start();
+                });
         }
     });
 
@@ -33,5 +37,6 @@
         equal(stage.getWidth(), windowWidth);
         equal(stage.getHeight(), windowHeight);
     });
+
 
 })();
