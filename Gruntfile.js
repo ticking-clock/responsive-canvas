@@ -1,23 +1,36 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        concat: {
+            options: {
+                stripBanners: true,
+                banner: '/*! <%= pkg.name %> v<%= pkg.version %> */\n'
+            },
+            test: {
+                src: ['<%= pkg.name %>.js', 'plugins/**/*.js'],
+                dest: 'tests/<%= pkg.name %>.tests.js'
+            },
+            core: {
+                src: ['<%= pkg.name %>.js'],
+                dest: 'dist/<%= pkg.name %>.js'
+            },
+            all: {
+                src: ['<%= pkg.name %>.js', 'plugins/**/*.js'],
+                dest: 'dist/<%= pkg.name %>.js'
+            }
+        },
         uglify: {
             options: {
                 banner: '/*! <%= pkg.name %> v<%= pkg.version %> */\n'
             },
             core: {
                 files: {
-                    'dist/<%= pkg.name %>.min.js': ['src/<%= pkg.name %>.js']
+                    'dist/<%= pkg.name %>.min.js': ['<%= pkg.name %>.js']
                 }
             },
-            kinetic: {
+            all: {
                 files: {
-                    'dist/<%= pkg.name %>.kinetic.min.js': ['src/<%= pkg.name %>.js', 'src/plugins/**/KineticJS*.js']
-                }
-            },
-            test: {
-                files: {
-                    'tests/<%= pkg.name %>.tests.min.js': ['src/<%= pkg.name %>.js', 'src/plugins/**/*.js']
+                    'dist/<%= pkg.name %>.min.js': ['<%= pkg.name %>.js', 'plugins/**/*.js']
                 }
             }
         },
@@ -96,14 +109,17 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: ['responsive-canvas.js', 'plugins/**/*.js'],
-            tasks: ['uglify']
+            files: ['<%= pkg.name %>.js', 'plugins/**/*.js'],
+            tasks: ['concat:all', 'uglify:all']
         }
     });
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['uglify:core', 'uglify:kinetic']);
-    grunt.registerTask('test', ['uglify:test', 'qunit']);
+    grunt.registerTask('default', ['concat:all', 'uglify:all']);
+    grunt.registerTask('all', ['concat:all', 'uglify:all']);
+    grunt.registerTask('core', ['concat:core', 'uglify:core']);
+    grunt.registerTask('test', ['concat:test', 'qunit']);
 };

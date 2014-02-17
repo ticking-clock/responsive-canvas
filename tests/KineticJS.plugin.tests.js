@@ -1,9 +1,9 @@
 (function() {
     module("Kinetic module tests without script");
 
-    test("Kinetic plugin is not present if Kinetic is not loaded", function() {
+    test("Kinetic plugin is not active if Kinetic is not loaded", function() {
         ok(typeof Kinetic === "undefined");
-        notEqual(responsiveCanvas.plugin, "KineticJS");
+        ok(!responsiveCanvas.plugin().isActive());
     });
 
     module("Kinetic module tests with script", {
@@ -17,14 +17,13 @@
     });
 
     test("Kinetic is detected for this test module", function() {
-        // Kinetic namespace
         ok(typeof Kinetic !== "undefined");
         ok(typeof Kinetic.version !== "undefined")
     });
 
     test("Kinetic plugin is present if Kinetic is loaded", function() {
         responsiveCanvas();
-        equal(responsiveCanvas.plugin, "KineticJS");
+        ok(responsiveCanvas.plugin().isActive());
     });
 
     test("Kinetic stage is window size", function() {
@@ -43,5 +42,4 @@
         responsiveCanvas();
         equal($(".kineticjs-content").css("display"), "block");
     });
-
 })();

@@ -2,22 +2,22 @@
     var BLOCK = "block",
         ZEROPX = "0px",
         cList = [],
+        plugin = {},
         getCanvases = function() {
             cList = document.querySelectorAll("canvas");
         },
         rc = window.responsiveCanvas = function() {
-            rc._init();
+            getCanvases();
+            rc.setStyles();
+            rc.resizeToWindow();
         };
-
-    rc._init = function() {
-        getCanvases();
-        rc.setStyles();
-        rc._initPlugin();
-        rc.resizeToWindow();
-    };
 
     rc.setStyles = function() {
         var c, body = document.body;
+        if (plugin.isActive()) {
+            plugin.setStyles();
+        }
+
         for (var i=0, len=cList.length; i<len; i++) {
             c = cList[i];
             if (getComputedStyle(c).display !== BLOCK) {
@@ -31,22 +31,24 @@
     };
 
     rc.resizeToWindow = function() {
-        rc._resizeToWindow(window.innerWidth, window.innerHeight);
-    };
-
-    window.addEventListener("resize", rc.resizeToWindow);
-
-    // Plugins overwrite these
-    rc._initPlugin = function() {};
-    rc._resizeToWindow = function(w, h) {
-        var c;
-        for (var i=0, len=cList.length; i<len; i++) {
-            c = cList[i];
-            c.width = w;
-            c.height = h;
+        var c, w = window.innerWidth, h = window.innerHeight;
+        if (plugin.isActive()) {
+            plugin.resizeToWindow(w, h);
+        } else {
+            for (var i=0, len=cList.length; i<len; i++) {
+                c = cList[i];
+                c.width = w;
+                c.height = h;
+            }
         }
     };
 
-})(window, document);
+    window.addEventListener("resize", rc.resizeToWindow);
+    window.addEventListener("DOMContentLoaded", function() { responsiveCanvas(); })
 
-responsiveCanvas();
+    rc.plugin = function(p) {
+        if (p) plugin = p;
+        return plugin;
+    };
+
+})(window, document);

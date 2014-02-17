@@ -1,8 +1,8 @@
 {
   "name": "responsive-canvas",
-  "main": ["dist/responsive-canvas.min.js",
-           "dist/responsive-canvas.kinetic.min.js"],
-  "version": "0.1.0",
+  "main": ["dist/responsive-canvas.js",
+           "dist/responsive-canvas.min.js"],
+  "version": "0.2.0",
   "homepage": "https://github.com/aekendall/responsive-canvas",
   "authors": ["Alan Kendall <alankendall@gmail.com>"],
   "description": "A very small library with no dependencies that makes your full-screen HTML5 canvas responsive to the viewport.",
