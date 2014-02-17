@@ -4,8 +4,8 @@ A very small library with no dependencies that makes your full-screen HTML5 canv
 
 Framework support
 ---
-The following HTML5 canvas frameworks are supported via plugin files:
-- KineticJS
+The following HTML5 canvas frameworks are supported:
+- KineticJS 5.0.1
 
 
 Usage
@@ -14,7 +14,7 @@ Usage
 <script src="responsive-canvas.min.js"></script>
 ```
 
-When the script loads, it will automatically resize all `<canvas>` elements to match the viewport size.
+The script will automatically resize all `<canvas>` elements to match the viewport size when the DOM is ready.
 
 You can manually trigger the resize by invoking the responsive canvas function.
 
